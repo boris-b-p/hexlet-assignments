@@ -15,7 +15,7 @@ public class Application {
 
     @GetMapping("/about")
     String home() {
-        return "Welcome to Hexlet! Hello World!!!";
+        return "Welcome to Hexlet!";
     }
 }
 // END
