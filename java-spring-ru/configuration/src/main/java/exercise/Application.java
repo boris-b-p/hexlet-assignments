@@ -1,14 +1,14 @@
 package exercise;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.beans.factory.annotation.Autowired;
+import  org.springframework.beans.factory.annotation.Autowired;
 
 import exercise.model.User;
 import exercise.component.UserProperties;
@@ -26,16 +26,15 @@ public class Application {
 
     @GetMapping("/admins")
     public List<String> getAdmins() {
-        List<String> adminsName = new ArrayList<>();
-        var adminsMail = usersInfo.getAdmins();
-        for (String x : adminsMail){
-            for (User user : users) {
-                if (user.getEmail().equals(x)) {
-                    adminsName.add(user.getName());
-                }
-            }
-        }
-        return adminsName.stream().distinct().sorted().toList();
+
+        List<String> adminEmails = usersInfo.getAdmins();
+
+        return users.stream()
+                .filter(u -> adminEmails.contains(u.getEmail()))
+                .map(u -> u.getName())
+                .sorted()
+                .toList();
+
     }
     // END
 
