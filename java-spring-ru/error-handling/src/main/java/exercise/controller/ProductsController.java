@@ -49,11 +49,10 @@ public class ProductsController {
     public Product update(@PathVariable long id, @RequestBody Product productUp) {
         var product = productRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Product with id " + id + " not found"));
-        product.setId(id);
         product.setTitle(productUp.getTitle());
         product.setPrice(productUp.getPrice());
         productRepository.save(product);
-        return productUp;
+        return product;
     }
     // END
 
