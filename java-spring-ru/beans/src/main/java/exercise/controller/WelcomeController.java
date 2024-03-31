@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
     @GetMapping(path = "")
     public String welcome() {
         var daytimeNaw = daytime.getName();
-        return "It is " + daytimeNaw + " now! Welcome to Spring!";
+        return "It is " + daytime.getName() + " now! Welcome to Spring!";
     }
 }
 // END
