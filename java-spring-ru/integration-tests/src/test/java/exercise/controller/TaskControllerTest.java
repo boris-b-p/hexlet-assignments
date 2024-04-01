@@ -141,6 +141,7 @@ class ApplicationTest {
 
         task = taskRepository.findById(task.getId()).orElse(null);
         assertThat(task).isNull();
+        
     }
     // END
 }
