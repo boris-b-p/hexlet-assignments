@@ -58,12 +58,9 @@ public class TasksController {
         return taskDTO;
     }
 
-    @DeleteMapping(path = "")
-    public TaskDTO delete(@Valid @RequestBody TaskCreateDTO taskData) {
-        var task = taskMapper.map(taskData);
-        taskRepository.delete(task);
-        var taskDTO = taskMapper.map(task);
-        return taskDTO;
+    @DeleteMapping(path = "/{id}")
+    public void delete(@PathVariable long id) {
+        taskRepository.deleteById(id);
     }
     // END
 }
