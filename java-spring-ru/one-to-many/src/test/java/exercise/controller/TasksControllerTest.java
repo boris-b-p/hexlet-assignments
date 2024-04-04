@@ -114,37 +114,37 @@ class TasksControllerTest {
         assertThat(task.getAssignee().getId()).isEqualTo(testTask.getAssignee().getId());
     }
 
-//    @Test
-//    public void testUpdate() throws Exception {
-//        taskRepository.save(testTask);
-//
-//        var dto = mapper.map(testTask);
-//
-//        dto.setTitle("new title");
-//        dto.setDescription("new description");
-//        dto.setAssigneeId(anotherUser.getId());
-//
-//        var request = put("/tasks/{id}", testTask.getId())
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .content(om.writeValueAsString(dto));
-//
-//        mockMvc.perform(request)
-//                .andExpect(status().isOk());
-//
-//        var task = taskRepository.findById(testTask.getId()).get();
-//
-//        assertThat(task.getTitle()).isEqualTo(dto.getTitle());
-//        assertThat(task.getDescription()).isEqualTo(dto.getDescription());
-//        assertThat(task.getAssignee().getId()).isEqualTo(dto.getAssigneeId());
-//    }
-//
-//    @Test
-//    public void testDestroy() throws Exception {
-//        taskRepository.save(testTask);
-//        var request = delete("/tasks/{id}", testTask.getId());
-//        mockMvc.perform(request)
-//                .andExpect(status().isNoContent());
-//
-//        assertThat(taskRepository.existsById(testTask.getId())).isFalse();
-//    }
+    @Test
+    public void testUpdate() throws Exception {
+        taskRepository.save(testTask);
+
+        var dto = mapper.map(testTask);
+
+        dto.setTitle("new title");
+        dto.setDescription("new description");
+        dto.setAssigneeId(anotherUser.getId());
+
+        var request = put("/tasks/{id}", testTask.getId())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(om.writeValueAsString(dto));
+
+        mockMvc.perform(request)
+                .andExpect(status().isOk());
+
+        var task = taskRepository.findById(testTask.getId()).get();
+
+        assertThat(task.getTitle()).isEqualTo(dto.getTitle());
+        assertThat(task.getDescription()).isEqualTo(dto.getDescription());
+        assertThat(task.getAssignee().getId()).isEqualTo(dto.getAssigneeId());
+    }
+
+    @Test
+    public void testDestroy() throws Exception {
+        taskRepository.save(testTask);
+        var request = delete("/tasks/{id}", testTask.getId());
+        mockMvc.perform(request)
+                .andExpect(status().isNoContent());
+
+        assertThat(taskRepository.existsById(testTask.getId())).isFalse();
+    }
 }
