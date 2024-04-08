@@ -10,17 +10,14 @@ import org.mapstruct.ReportingPolicy;
 
 // BEGIN
 @Mapper(
-        uses = { JsonNullableMapper.class, ReferenceMapper.class },
         nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE,
         componentModel = MappingConstants.ComponentModel.SPRING,
         unmappedTargetPolicy = ReportingPolicy.IGNORE
 )
 public abstract class CategoryMapper {
-    //    @Mapping(target = "author", source = "authorId")
+
     public abstract Category map(CategoryCreateDTO dto);
 
-    //    @Mapping(source = "author.id", target = "authorId")
     public abstract CategoryDTO map(Category model);
-
 }
 // END

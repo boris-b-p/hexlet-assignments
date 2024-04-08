@@ -68,120 +68,120 @@ class ProductsControllerTest {
         testProduct.setCategory(category);
     }
 
-//    @Test
-//    public void testIndex() throws Exception {
-//        productRepository.save(testProduct);
-//        var result = mockMvc.perform(get("/products"))
-//                .andExpect(status().isOk())
-//                .andReturn();
-//
-//        var body = result.getResponse().getContentAsString();
-//        assertThatJson(body).isArray();
-//    }
-//
-//    @Test
-//    public void testShow() throws Exception {
-//
-//        productRepository.save(testProduct);
-//
-//        var request = get("/products/{id}", testProduct.getId());
-//        var result = mockMvc.perform(request)
-//                .andExpect(status().isOk())
-//                .andReturn();
-//        var body = result.getResponse().getContentAsString();
-//
-//        assertThatJson(body).and(
-//                v -> v.node("title").isEqualTo(testProduct.getTitle()),
-//                v -> v.node("price").isEqualTo(testProduct.getPrice()),
-//                v -> v.node("categoryId").isEqualTo(testProduct.getCategory().getId()),
-//                v -> v.node("categoryName").isEqualTo(testProduct.getCategory().getName())
-//        );
-//    }
-//
-//    @Test
-//    public void testCreate() throws Exception {
-//        var dto = mapper.map(testProduct);
-//
-//        var request = post("/products")
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .content(om.writeValueAsString(dto));
-//
-//        mockMvc.perform(request)
-//                .andExpect(status().isCreated());
-//
-//        var product = productRepository.findByTitle(testProduct.getTitle()).get();
-//
-//        assertThat(product).isNotNull();
-//        assertThat(product.getTitle()).isEqualTo(testProduct.getTitle());
-//        assertThat(product.getPrice()).isEqualTo(testProduct.getPrice());
-//        assertThat(product.getCategory().getId()).isEqualTo(testProduct.getCategory().getId());
-//    }
-//
-//    @Test
-//    public void testCreateWithWrongCategory() throws Exception {
-//        var dto = mapper.map(testProduct);
-//        dto.setCategoryId(12345L);
-//
-//        var request = post("/products")
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .content(om.writeValueAsString(dto));
-//
-//        mockMvc.perform(request)
-//                .andExpect(status().isBadRequest());
-//    }
-//
-//    @Test
-//    public void testUpdate() throws Exception {
-//        productRepository.save(testProduct);
-//
-//        var dto = mapper.map(testProduct);
-//
-//        dto.setTitle("new title");
-//        dto.setPrice(123);
-//        dto.setCategoryId(anotherCategory.getId());
-//
-//        var request = put("/products/{id}", testProduct.getId())
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .content(om.writeValueAsString(dto));
-//
-//        mockMvc.perform(request)
-//                .andExpect(status().isOk());
-//
-//        var task = productRepository.findById(testProduct.getId()).get();
-//
-//        assertThat(task.getTitle()).isEqualTo(dto.getTitle());
-//        assertThat(task.getPrice()).isEqualTo(dto.getPrice());
-//        assertThat(task.getCategory().getId()).isEqualTo(dto.getCategoryId());
-//    }
-//
-//    @Test
-//    public void testPartialUpdate() throws Exception {
-//        productRepository.save(testProduct);
-//
-//        var dto = new HashMap<String, Long>();
-//        dto.put("categoryId", anotherCategory.getId());
-//
-//        var request = put("/products/{id}", testProduct.getId())
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .content(om.writeValueAsString(dto));
-//
-//        mockMvc.perform(request)
-//                .andExpect(status().isOk());
-//
-//        var task = productRepository.findById(testProduct.getId()).get();
-//
-//        assertThat(task.getTitle()).isEqualTo(testProduct.getTitle());
-//        assertThat(task.getPrice()).isEqualTo(testProduct.getPrice());
-//        assertThat(task.getCategory().getId()).isEqualTo(dto.get("categoryId"));
-//    }
-//
-//    @Test
-//    public void testDestroy() throws Exception {
-//        productRepository.save(testProduct);
-//        var request = delete("/products/{id}", testProduct.getId());
-//        mockMvc.perform(request)
-//                .andExpect(status().isNoContent());
-//
-//        assertThat(productRepository.existsById(testProduct.getId())).isEqualTo(false);
-//    }
+    @Test
+    public void testIndex() throws Exception {
+        productRepository.save(testProduct);
+        var result = mockMvc.perform(get("/products"))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        var body = result.getResponse().getContentAsString();
+        assertThatJson(body).isArray();
+    }
+
+    @Test
+    public void testShow() throws Exception {
+
+        productRepository.save(testProduct);
+
+        var request = get("/products/{id}", testProduct.getId());
+        var result = mockMvc.perform(request)
+                .andExpect(status().isOk())
+                .andReturn();
+        var body = result.getResponse().getContentAsString();
+
+        assertThatJson(body).and(
+                v -> v.node("title").isEqualTo(testProduct.getTitle()),
+                v -> v.node("price").isEqualTo(testProduct.getPrice()),
+                v -> v.node("categoryId").isEqualTo(testProduct.getCategory().getId()),
+                v -> v.node("categoryName").isEqualTo(testProduct.getCategory().getName())
+        );
+    }
+
+    @Test
+    public void testCreate() throws Exception {
+        var dto = mapper.map(testProduct);
+
+        var request = post("/products")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(om.writeValueAsString(dto));
+
+        mockMvc.perform(request)
+                .andExpect(status().isCreated());
+
+        var product = productRepository.findByTitle(testProduct.getTitle()).get();
+
+        assertThat(product).isNotNull();
+        assertThat(product.getTitle()).isEqualTo(testProduct.getTitle());
+        assertThat(product.getPrice()).isEqualTo(testProduct.getPrice());
+        assertThat(product.getCategory().getId()).isEqualTo(testProduct.getCategory().getId());
+    }
+
+    @Test
+    public void testCreateWithWrongCategory() throws Exception {
+        var dto = mapper.map(testProduct);
+        dto.setCategoryId(12345L);
+
+        var request = post("/products")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(om.writeValueAsString(dto));
+
+        mockMvc.perform(request)
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void testUpdate() throws Exception {
+        productRepository.save(testProduct);
+
+        var dto = mapper.map(testProduct);
+
+        dto.setTitle("new title");
+        dto.setPrice(123);
+        dto.setCategoryId(anotherCategory.getId());
+
+        var request = put("/products/{id}", testProduct.getId())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(om.writeValueAsString(dto));
+
+        mockMvc.perform(request)
+                .andExpect(status().isOk());
+
+        var task = productRepository.findById(testProduct.getId()).get();
+
+        assertThat(task.getTitle()).isEqualTo(dto.getTitle());
+        assertThat(task.getPrice()).isEqualTo(dto.getPrice());
+        assertThat(task.getCategory().getId()).isEqualTo(dto.getCategoryId());
+    }
+
+    @Test
+    public void testPartialUpdate() throws Exception {
+        productRepository.save(testProduct);
+
+        var dto = new HashMap<String, Long>();
+        dto.put("categoryId", anotherCategory.getId());
+
+        var request = put("/products/{id}", testProduct.getId())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(om.writeValueAsString(dto));
+
+        mockMvc.perform(request)
+                .andExpect(status().isOk());
+
+        var task = productRepository.findById(testProduct.getId()).get();
+
+        assertThat(task.getTitle()).isEqualTo(testProduct.getTitle());
+        assertThat(task.getPrice()).isEqualTo(testProduct.getPrice());
+        assertThat(task.getCategory().getId()).isEqualTo(dto.get("categoryId"));
+    }
+
+    @Test
+    public void testDestroy() throws Exception {
+        productRepository.save(testProduct);
+        var request = delete("/products/{id}", testProduct.getId());
+        mockMvc.perform(request)
+                .andExpect(status().isNoContent());
+
+        assertThat(productRepository.existsById(testProduct.getId())).isEqualTo(false);
+    }
 }
