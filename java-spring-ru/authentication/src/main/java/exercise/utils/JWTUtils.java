@@ -24,7 +24,7 @@ public class JWTUtils {
                 .expiresAt(now.plus(1, ChronoUnit.HOURS))
                 .subject(username)
                 .build();
-        return this.encoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
+        return encoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
     }
 }
 // END

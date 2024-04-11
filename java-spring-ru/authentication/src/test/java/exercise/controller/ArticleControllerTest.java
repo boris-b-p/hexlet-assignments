@@ -72,110 +72,110 @@ class ArticleControllerTest {
         token = jwt().jwt(builder -> builder.subject(userUtils.getTestUser().getEmail()));
     }
 
-//    @Test
-//    public void testIndex() throws Exception {
-//        articleRepository.save(testArticle);
-//        var result = mockMvc.perform(get("/articles").with(token))
-//                .andExpect(status().isOk())
-//                .andReturn();
-//
-//        var body = result.getResponse().getContentAsString();
-//        assertThatJson(body).isArray();
-//    }
-//
-//    @Test
-//    public void testShow() throws Exception {
-//
-//        articleRepository.save(testArticle);
-//
-//        var request = get("/articles/{id}", testArticle.getId()).with(token);
-//        var result = mockMvc.perform(request)
-//                .andExpect(status().isOk())
-//                .andReturn();
-//        var body = result.getResponse().getContentAsString();
-//
-//        assertThatJson(body).and(
-//                v -> v.node("title").isEqualTo(testArticle.getTitle()),
-//                v -> v.node("content").isEqualTo(testArticle.getContent()),
-//                v -> v.node("author").isEqualTo(testArticle.getAuthor().getName())
-//        );
-//    }
-//
-//    @Test
-//    public void testCreate() throws Exception {
-//        var dto = mapper.map(testArticle);
-//
-//        var request = post("/articles")
-//                .with(token)
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .content(om.writeValueAsString(dto));
-//
-//        mockMvc.perform(request)
-//                .andExpect(status().isCreated());
-//
-//        var task = articleRepository.findBySlug(testArticle.getSlug()).get();
-//
-//        assertThat(task).isNotNull();
-//        assertThat(task.getTitle()).isEqualTo(testArticle.getTitle());
-//        assertThat(task.getContent()).isEqualTo(testArticle.getContent());
-//        assertThat(task.getAuthor().getId()).isEqualTo(testArticle.getAuthor().getId());
-//    }
-//
-//    @Test
-//    public void testUpdate() throws Exception {
-//        articleRepository.save(testArticle);
-//
-//        var data = new ArticleUpdateDTO();
-//        data.setTitle(JsonNullable.of("new title"));
-//
-//
-//        var request = put("/articles/{id}", testArticle.getId())
-//                .with(token)
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .content(om.writeValueAsString(data));
-//
-//        mockMvc.perform(request)
-//                .andExpect(status().isOk());
-//
-//        var task = articleRepository.findById(testArticle.getId()).get();
-//
-//        assertThat(task.getTitle()).isEqualTo(data.getTitle().get());
-//        assertThat(task.getContent()).isEqualTo(testArticle.getContent());
-//    }
-//
-//    @Test
-//    public void testDestroy() throws Exception {
-//        articleRepository.save(testArticle);
-//        var request = delete("/articles/{id}", testArticle.getId()).with(token);
-//        mockMvc.perform(request)
-//                .andExpect(status().isNoContent());
-//
-//        assertThat(articleRepository.existsById(testArticle.getId())).isFalse();
-//    }
-//
-//    @Test
-//    public void testIndexWithoutAuth() throws Exception {
-//
-//        var result = mockMvc.perform(get("/articles"))
-//                .andExpect(status().isUnauthorized());
-//    }
-//
-//    @Test
-//    public void testShowWithoutAuth() throws Exception {
-//        var request = get("/articles/{id}", testArticle.getId());
-//        var result = mockMvc.perform(request)
-//                .andExpect(status().isUnauthorized());
-//    }
-//
-//    @Test
-//    public void testCreateWithoutAuth() throws Exception {
-//        var dto = mapper.map(testArticle);
-//
-//        var request = post("/articles")
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .content(om.writeValueAsString(dto));
-//
-//        mockMvc.perform(request)
-//                .andExpect(status().isUnauthorized());
-//    }
+    @Test
+    public void testIndex() throws Exception {
+        articleRepository.save(testArticle);
+        var result = mockMvc.perform(get("/articles").with(token))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        var body = result.getResponse().getContentAsString();
+        assertThatJson(body).isArray();
+    }
+
+    @Test
+    public void testShow() throws Exception {
+
+        articleRepository.save(testArticle);
+
+        var request = get("/articles/{id}", testArticle.getId()).with(token);
+        var result = mockMvc.perform(request)
+                .andExpect(status().isOk())
+                .andReturn();
+        var body = result.getResponse().getContentAsString();
+
+        assertThatJson(body).and(
+                v -> v.node("title").isEqualTo(testArticle.getTitle()),
+                v -> v.node("content").isEqualTo(testArticle.getContent()),
+                v -> v.node("author").isEqualTo(testArticle.getAuthor().getName())
+        );
+    }
+
+    @Test
+    public void testCreate() throws Exception {
+        var dto = mapper.map(testArticle);
+
+        var request = post("/articles")
+                .with(token)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(om.writeValueAsString(dto));
+
+        mockMvc.perform(request)
+                .andExpect(status().isCreated());
+
+        var task = articleRepository.findBySlug(testArticle.getSlug()).get();
+
+        assertThat(task).isNotNull();
+        assertThat(task.getTitle()).isEqualTo(testArticle.getTitle());
+        assertThat(task.getContent()).isEqualTo(testArticle.getContent());
+        assertThat(task.getAuthor().getId()).isEqualTo(testArticle.getAuthor().getId());
+    }
+
+    @Test
+    public void testUpdate() throws Exception {
+        articleRepository.save(testArticle);
+
+        var data = new ArticleUpdateDTO();
+        data.setTitle(JsonNullable.of("new title"));
+
+
+        var request = put("/articles/{id}", testArticle.getId())
+                .with(token)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(om.writeValueAsString(data));
+
+        mockMvc.perform(request)
+                .andExpect(status().isOk());
+
+        var task = articleRepository.findById(testArticle.getId()).get();
+
+        assertThat(task.getTitle()).isEqualTo(data.getTitle().get());
+        assertThat(task.getContent()).isEqualTo(testArticle.getContent());
+    }
+
+    @Test
+    public void testDestroy() throws Exception {
+        articleRepository.save(testArticle);
+        var request = delete("/articles/{id}", testArticle.getId()).with(token);
+        mockMvc.perform(request)
+                .andExpect(status().isNoContent());
+
+        assertThat(articleRepository.existsById(testArticle.getId())).isFalse();
+    }
+
+    @Test
+    public void testIndexWithoutAuth() throws Exception {
+
+        var result = mockMvc.perform(get("/articles"))
+                .andExpect(status().isUnauthorized());
+    }
+
+    @Test
+    public void testShowWithoutAuth() throws Exception {
+        var request = get("/articles/{id}", testArticle.getId());
+        var result = mockMvc.perform(request)
+                .andExpect(status().isUnauthorized());
+    }
+
+    @Test
+    public void testCreateWithoutAuth() throws Exception {
+        var dto = mapper.map(testArticle);
+
+        var request = post("/articles")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(om.writeValueAsString(dto));
+
+        mockMvc.perform(request)
+                .andExpect(status().isUnauthorized());
+    }
 }
